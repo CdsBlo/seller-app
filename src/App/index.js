@@ -7,6 +7,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header />
+      MAIN
     </ThemeProvider>
   );
 }
