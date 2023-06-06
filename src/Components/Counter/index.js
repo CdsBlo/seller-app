@@ -1,4 +1,4 @@
-import React from "react";
+import { number } from "prop-types";
 import { useCounter } from "react-use";
 
 export default function Counter({ startValue = 0, step = 1 }) {
@@ -11,3 +11,8 @@ export default function Counter({ startValue = 0, step = 1 }) {
     </>
   );
 }
+
+Counter.propTypes = {
+  startValue: number,
+  step: number,
+};

@@ -1,25 +1,13 @@
-import raccoon from "../bonus/raccoon.jpg";
-import CountDown from "../Components/Counter";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import theme from "./theme";
+import Header from "../Components/Header";
 
 function App() {
   return (
-    <CountDown startValue={1} step={3} />
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={raccoon} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Header />
+    </ThemeProvider>
   );
 }
 
