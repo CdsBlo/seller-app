@@ -1,25 +1,30 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import theme from "./theme";
-import { Header, Menu } from "../ds/molecules";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const items_old = [
-  { name: "Produits", route: "/products" },
-  { name: "Commandes", route: "/order" },
-  { name: "Finance", route: "/finance" },
-  { name: "Rapports", route: "/reports" },
-  { name: "Messages", route: "/messages" },
-  { name: "Markeplaces", route: "/markplaces" },
-];
+import theme from "./theme";
+import { Layout } from "../ds/templates";
+import { CommandesPage, ErrorPage, ProductsPage } from "../ds/pages";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <ProductsPage /> },
+      {
+        path: "/commandes",
+        element: <CommandesPage />,
+      },
+    ],
+  },
+]);
 
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header
-        title="Sel'heure de vendre"
-        caption="Comment est votre blanquette ?"
-      />
-      <Menu items={items_old} />
+      <RouterProvider router={router}></RouterProvider>
     </ThemeProvider>
   );
 }
