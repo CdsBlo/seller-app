@@ -1,5 +1,6 @@
 import { MenuList, Link, Nav } from "./styles";
 import { arrayOf, shape, string } from "prop-types";
+import { Link as RRDLink } from "react-router-dom";
 
 export default function Menu({ items }) {
   return (
@@ -7,7 +8,9 @@ export default function Menu({ items }) {
       <MenuList>
         {items.map(({ name, route }) => (
           <li key={route}>
-            <Link href={route}>{name}</Link>
+            <Link to={route} component={RRDLink}>
+              {name}
+            </Link>
           </li>
         ))}
       </MenuList>
