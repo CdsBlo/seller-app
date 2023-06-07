@@ -1,6 +1,5 @@
-//import { Link as MUILink } from "@mui/material";
+import { Link as MUILink } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { Link as RRDLink } from "react-router-dom";
 
 export const MenuList = styled("ol")(({ theme }) => ({
   backgroundColor: theme.palette.secondary.light,
@@ -10,7 +9,7 @@ export const MenuList = styled("ol")(({ theme }) => ({
   margin: 0,
 }));
 
-export const Link = styled(RRDLink, {
+export const Link = styled(MUILink, {
   shouldForwardProp: (prop) => prop !== "current",
 })(({ current, theme }) => ({
   display: "flex",
