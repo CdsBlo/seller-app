@@ -26,6 +26,7 @@ export default function useProducts() {
     }
   }, [setProducts]);*/
 
+  /* TODO BLO : Nice one */
   const queryResult = useQuery(
     ["products"],
     async () => await api.get("products").json()
