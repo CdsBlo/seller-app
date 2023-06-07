@@ -11,7 +11,7 @@ const items_old = [
   { name: "Markeplaces", route: "/markplaces" },
 ];
 
-function App() {
+export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -23,5 +23,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;

@@ -1,4 +1,4 @@
-import { MenuList, MenuListItem, Link, Nav } from "./styles";
+import { MenuList, Link, Nav } from "./styles";
 import { arrayOf, shape, string } from "prop-types";
 
 export default function Menu({ items }) {
@@ -6,9 +6,9 @@ export default function Menu({ items }) {
     <Nav>
       <MenuList>
         {items.map(({ name, route }) => (
-          <MenuListItem key={route}>
+          <li key={route}>
             <Link href={route}>{name}</Link>
-          </MenuListItem>
+          </li>
         ))}
       </MenuList>
     </Nav>
