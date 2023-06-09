@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Header, Menu } from "../../molecules";
 
 const items_old = [
-  { name: "Produits", route: "/" },
+  { name: "Produits", route: "/products" },
   { name: "Commandes", route: "/commandes" },
   { name: "Finance", route: "/finance" },
   { name: "Rapports", route: "/reports" },
@@ -13,7 +13,7 @@ const items_old = [
 export default function Layout() {
   return (
     <>
-      <Header title="Marjane" caption="Bienvenue" />
+      <Header title="Seller de vendre" caption="Comment est votre blanquette" />
       <Menu items={items_old} />
       <Outlet />
     </>
