@@ -1,6 +1,11 @@
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { ConditionProductChip, Price, ProductImage } from "../../atoms";
+import {
+  ConditionProductChip,
+  Price,
+  ProductImage,
+  ProductLink,
+} from "../../atoms";
 import { useProducts } from "../../../hooks";
 
 const columns = [
@@ -10,7 +15,7 @@ const columns = [
     renderCell: ProductImage,
     sortable: false,
   },
-  { field: "name", headerName: "Produit", width: 250 },
+  { field: "name", headerName: "Produit", width: 250, renderCell: ProductLink },
   {
     field: "condition",
     headerName: "Condition",
