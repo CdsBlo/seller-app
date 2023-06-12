@@ -46,3 +46,7 @@ Ship it 👀
 ## Powered by CRA
 
 [CRA Documentation](./docs/CRA.md)
+
+## Bonus:
+
+https://my-json-server.typicode.com/CdsBlo/seller-app/master/products
