@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import {
   ConditionProductChip,
@@ -7,6 +7,7 @@ import {
   ProductLink,
 } from "../../atoms";
 import { useProducts } from "../../../hooks";
+import { Outlet, useParams } from "react-router-dom";
 
 const columns = [
   {
@@ -56,15 +57,27 @@ const columns = [
 
 export default function ProductsPage() {
   const { isLoading, products } = useProducts();
+  const { productId } = useParams();
+
+  console.log(productId);
+  const leftWidth = productId ? 7 : 12;
+  const rightWidth = productId ? 5 : 0;
 
   return (
-    <Box sx={{ height: 400, width: "100%" }}>
-      <DataGrid
-        columns={columns}
-        rows={products}
-        disableRowSelectionOnClick={true}
-        loading={isLoading}
-      />
-    </Box>
+    <>
+      <Grid item container>
+        <Box sx={{ height: 800 }} xs={leftWidth}>
+          <DataGrid
+            columns={columns}
+            rows={products}
+            disableRowSelectionOnClick={true}
+            loading={isLoading}
+          />
+        </Box>
+        <Grid item component="aside" xs={rightWidth}>
+          <Outlet />
+        </Grid>
+      </Grid>
+    </>
   );
 }
