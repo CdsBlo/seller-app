@@ -27,7 +27,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint --cache .",
     "start": "react-scripts start",
-    "start:api": "json-server --watch data/db.json --port 3004",
+    "start:api": "json-server --watch db.json --port 3004",
     "test": "react-scripts test"
   },
   "eslintConfig": {
