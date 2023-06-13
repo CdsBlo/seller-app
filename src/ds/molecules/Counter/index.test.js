@@ -3,8 +3,10 @@ import userEvent from "@testing-library/user-event";
 import Counter from ".";
 
 const counterValue = () => screen.getByRole("marquee");
-const incButton = () => screen.getByRole("button", { name: "+1" });
-const decButton = () => screen.getByRole("button", { name: "-1" });
+const incButton = ({ step = 1 } = { step: 1 }) =>
+  screen.getByRole("button", { name: "+" + step });
+const decButton = ({ step = 1 } = { step: 1 }) =>
+  screen.getByRole("button", { name: "-" + step });
 
 // Test suite
 describe("Counter", () => {
@@ -54,7 +56,7 @@ describe("Counter", () => {
   it("renders the counter value and the 2 inc/dec buttons", () => {
     render(<Counter />);
 
-    expect(counterValue()).toHaveTextContent("0");
+    expect(counterValue()).toHaveTextContent(/^0$/);
     expect(incButton()).toBeInTheDocument();
     expect(decButton()).toBeInTheDocument();
   });
@@ -63,17 +65,109 @@ describe("Counter", () => {
     render(<Counter />);
 
     userEvent.click(incButton());
-    expect(counterValue()).toHaveTextContent("1");
+    expect(counterValue()).toHaveTextContent(/^1$/);
     userEvent.click(incButton());
-    expect(counterValue()).toHaveTextContent("2");
+    expect(counterValue()).toHaveTextContent(/^2$/);
 
     userEvent.click(decButton());
-    expect(counterValue()).toBeInTheDocument("1");
+    expect(counterValue()).toBeInTheDocument(/^1$/);
     userEvent.click(decButton());
-    expect(counterValue()).toBeInTheDocument("0");
+    expect(counterValue()).toBeInTheDocument(/^0$/);
     userEvent.click(decButton());
-    expect(counterValue()).toBeInTheDocument("0");
+    expect(counterValue()).toBeInTheDocument(/^0$/);
     userEvent.click(incButton());
-    expect(counterValue()).toHaveTextContent("1");
+    expect(counterValue()).toHaveTextContent(/^1$/);
+  });
+
+  describe("while startValue === 10", () => {
+    it("renders the counter value and the 2 inc/dec buttons", () => {
+      render(<Counter startValue={10} />);
+
+      expect(counterValue()).toHaveTextContent(/^10$/);
+      expect(incButton()).toBeInTheDocument();
+      expect(decButton()).toBeInTheDocument();
+    });
+
+    it("increments and decrements properly the counterValue on click", () => {
+      render(<Counter startValue={10} />);
+
+      userEvent.click(incButton());
+      expect(counterValue()).toHaveTextContent(/^11$/);
+      userEvent.click(incButton());
+      expect(counterValue()).toHaveTextContent(/^12$/);
+
+      userEvent.click(decButton());
+      expect(counterValue()).toBeInTheDocument(/^11$/);
+      userEvent.click(decButton());
+      expect(counterValue()).toBeInTheDocument(/^10$/);
+      userEvent.click(decButton());
+      expect(counterValue()).toBeInTheDocument(/^10$/);
+      userEvent.click(incButton());
+      expect(counterValue()).toHaveTextContent(/^11$/);
+    });
+  });
+
+  describe("while startValue === 100", () => {
+    it("renders the counter value and the 2 inc/dec buttons", () => {
+      render(<Counter startValue={100} />);
+
+      expect(counterValue()).toHaveTextContent(/^100$/);
+      expect(incButton()).toBeInTheDocument();
+      expect(decButton()).toBeInTheDocument();
+    });
+
+    it("increments and decrements properly the counterValue on click", () => {
+      render(<Counter startValue={100} />);
+
+      userEvent.click(incButton());
+      expect(counterValue()).toHaveTextContent(/^101$/);
+      userEvent.click(incButton());
+      expect(counterValue()).toHaveTextContent(/^102$/);
+
+      userEvent.click(decButton());
+      expect(counterValue()).toBeInTheDocument(/^101$/);
+      userEvent.click(decButton());
+      expect(counterValue()).toBeInTheDocument(/^100$/);
+      userEvent.click(decButton());
+      expect(counterValue()).toBeInTheDocument(/^100$/);
+      userEvent.click(incButton());
+      expect(counterValue()).toHaveTextContent(/^101$/);
+    });
+  });
+
+  describe("while step 3", () => {
+    const step = 3;
+
+    it("renders the counter value and the 2 inc/dec buttons", () => {
+      render(<Counter step={step} />);
+
+      expect(counterValue()).toHaveTextContent(/^0$/);
+      expect(incButton({ step })).toBeInTheDocument();
+      expect(decButton({ step })).toBeInTheDocument();
+    });
+
+    it("increments and decrements properly the counterValue on click", () => {
+      render(<Counter step={3} />);
+
+      userEvent.click(incButton({ step }));
+      expect(counterValue()).toHaveTextContent(/^3$/);
+      userEvent.click(incButton({ step }));
+      expect(counterValue()).toHaveTextContent(/^6$/);
+
+      userEvent.click(decButton({ step }));
+      expect(counterValue()).toBeInTheDocument(/^3$/);
+      userEvent.click(decButton({ step }));
+      expect(counterValue()).toBeInTheDocument(/^0$/);
+      userEvent.click(decButton({ step }));
+      expect(counterValue()).toBeInTheDocument(/^0$/);
+      userEvent.click(incButton({ step }));
+      expect(counterValue()).toHaveTextContent(/^3$/);
+    });
+  });
+
+  xdescribe("Ignore this one because it's an xdescribe", () => {
+    it("won't be run because xdescibe", () => {
+      expect(true).toBe(true);
+    });
   });
 });
