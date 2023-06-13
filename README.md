@@ -34,14 +34,37 @@ We tend tu ose the Atomic Design approch whil writing our components
 
 ```
 / src
+    /contexts
     /ds
         /atoms
         /molecules
         /pages
         /templates
+    /hooks
 ```
 
 Ship it 👀
+
+## User context
+
+It wil be in charge of usr tahtt **and** sales channel selection
+
+```javascript
+const user = {isLoggedIn: true, salesChannel: "guid"}
+const App = ({]}) => (
+    <UserContextProvider user={user}>
+        <Routes/>
+    </UserContextProvider>
+);
+
+const Route = {()} => {
+    const {isLoggedIn, salesChannel} = UserContext.useUserContext();
+
+    if (!isLoggedIn) return <Redirect />;
+
+    return <p>{salesChannel}</p>
+}
+```
 
 ## Powered by CRA
 

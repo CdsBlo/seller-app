@@ -59,7 +59,6 @@ export default function ProductsPage() {
   const { isLoading, products } = useProducts();
   const { productId } = useParams();
 
-  console.log(productId);
   const leftWidth = productId ? 7 : 12;
   const rightWidth = productId ? 5 : 0;
 
