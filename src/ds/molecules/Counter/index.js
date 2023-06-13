@@ -5,9 +5,9 @@ export default function Counter({ startValue = 0, step = 1 }) {
   const [currentValue, { inc, dec }] = useCounter(startValue, null, startValue);
   return (
     <>
-      <p>{currentValue}</p>
-      <button onClick={() => dec(step)}>- {step}</button>
-      <button onClick={() => inc(step)}>+ {step}</button>
+      <p role="marquee">{currentValue}</p>
+      <button onClick={() => dec(step)}>-{step}</button>
+      <button onClick={() => inc(step)}>+{step}</button>
     </>
   );
 }
