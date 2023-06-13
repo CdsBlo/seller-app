@@ -28,6 +28,8 @@ git add .a
 yarn commit
 ```
 
+Ship it 👀
+
 ## Folder strcture
 
 We tend tu ose the Atomic Design approch whil writing our components
@@ -43,7 +45,11 @@ We tend tu ose the Atomic Design approch whil writing our components
     /hooks
 ```
 
-Ship it 👀
+## Testing
+
+We will tend to use anytime/anywhere our custom `render` method to represent the context or our application.
+
+This `render` method is defined in: `/src/test-utils.js`
 
 ## User context
 
