@@ -45,6 +45,8 @@ We tend tu ose the Atomic Design approch whil writing our components
     /hooks
 ```
 
+For all testing data, we use the ['/src/fixtures'](/src/fixtures)
+
 ## Testing
 
 We will tend to use anytime/anywhere our custom `render` method to represent the context or our application.
@@ -57,7 +59,7 @@ It wil be in charge of usr tahtt **and** sales channel selection
 
 ```javascript
 const user = {isLoggedIn: true, salesChannel: "guid"}
-const App = ({]}) => (
+const App = ({user}) => (
     <UserContextProvider user={user}>
         <Routes/>
     </UserContextProvider>
@@ -79,3 +81,11 @@ const Route = {()} => {
 ## Bonus:
 
 https://my-json-server.typicode.com/CdsBlo/seller-app/master/products
+
+## TODO
+
+- [x] faire une TODO
+- [] faire fonctionner le contexte de tests
+- [] use Context / useReducer
+- [] Array#reduce
+- [] Storybook

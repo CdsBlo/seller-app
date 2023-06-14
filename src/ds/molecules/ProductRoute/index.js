@@ -8,6 +8,7 @@ import { ArrowBack } from "@mui/icons-material";
 export default function ProductRoute() {
   const { productId } = useParams();
   const { isLoading, product } = useProducts({ productId });
+  console.log({ productId });
 
   if (isLoading) {
     return <CircularProgress />;

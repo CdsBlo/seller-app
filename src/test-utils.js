@@ -1,25 +1,52 @@
-import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { render } from "@testing-library/react";
-import { node } from "prop-types";
-import { MemoryRouter } from "react-router-dom";
+import { arrayOf, node, string } from "prop-types";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 
-const AppTechnicalContext = ({ children }) => {
+const client = new QueryClient();
+
+/**
+ *
+ */
+const AppTechnicalContext = ({
+  children,
+  path = "/",
+  initialEntries = ["/"],
+}) => {
   return (
-    <MemoryRouter>
-      <ThemeProvider theme={createTheme()}>{children}</ThemeProvider>
-    </MemoryRouter>
+    <QueryClientProvider client={client}>
+      <ThemeProvider theme={createTheme()}>
+        <MemoryRouter initialEntries={initialEntries}>
+          <Routes>
+            <Route path={path} element={children} />
+          </Routes>
+        </MemoryRouter>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 
 AppTechnicalContext.propTypes = {
   children: node,
+  path: string,
+  initialEntries: arrayOf(string),
 };
 
-const customRender = (component, options) =>
-  render(component, { wrapper: AppTechnicalContext, ...options });
+const customRender = (component, options = {}) => {
+  const { path, initialEntries, ...renderOptions } = options;
+
+  return render(component, {
+    wrapper: ({ children }) => (
+      <AppTechnicalContext path={path} initialEntries={initialEntries}>
+        {children}
+      </AppTechnicalContext>
+    ),
+    ...renderOptions,
+  });
+};
 
 // eslint-disable-next-line import/export
 export * from "@testing-library/react";
-
 // eslint-disable-next-line import/export
 export { customRender as render };

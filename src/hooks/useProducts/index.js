@@ -1,5 +1,4 @@
 import { useQuery } from "react-query";
-import api from "../../api";
 
 export default function useProducts({ productId } = {}) {
   /* TODO BLO : Old notation
@@ -39,7 +38,11 @@ export default function useProducts({ productId } = {}) {
 
   const queryResult = useQuery(
     queryKey,
-    async () => await api.get(productApiUrl).json()
+    //async () => await api.get(productApiUrl).json() //ky not compatible
+    async () => {
+      const response = await fetch(`http://localhost:3004/${productApiUrl}`);
+      return await response.json();
+    }
   );
 
   const resource = productId
